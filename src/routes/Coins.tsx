@@ -1,11 +1,90 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+const coins = [
+  {
+    id: "btc-bitcoin",
+    name: "Bitcoin",
+    symbol: "BTC",
+    rank: 1,
+    is_new: false,
+    is_active: true,
+    type: "coin",
+  },
+  {
+    id: "eth-ethereum",
+    name: "Ethereum",
+    symbol: "ETH",
+    rank: 2,
+    is_new: false,
+    is_active: true,
+    type: "coin",
+  },
+  {
+    id: "hex-hex",
+    name: "HEX",
+    symbol: "HEX",
+    rank: 3,
+    is_new: false,
+    is_active: true,
+    type: "token",
+  },
+];
+
+const Container = styled.div`
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+`;
+
+const Header = styled.header`
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px;
+`;
+
+const CoinList = styled.ul``;
+
+const Coin = styled.li`
+  background-color: white;
+  color: ${(props) => props.theme.bgColor};
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  a {
+    display: block;
+    transition: color 0.2s ease-in;
+  }
+  &:hover {
+    a {
+      color: ${(props) => props.theme.accentColor};
+    }
+  }
+`;
+
 const Title = styled.div`
+  font-size: 48px;
   color: ${(props) => props.theme.accentColor};
 `;
 
 const Coins = () => {
-  return <Title>코인</Title>;
+  return (
+    <Container>
+      <Header>
+        <Title>코인</Title>
+      </Header>
+      <CoinList>
+        {coins.map((coin) => (
+          <Coin key={coin.id}>
+            <Link to={`/ ${coin.id}`}> {coin.name} &rarr;</Link>
+          </Coin>
+        ))}
+      </CoinList>
+    </Container>
+  );
 };
 
 export default Coins;
