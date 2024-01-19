@@ -39,7 +39,8 @@ const Coin = styled.li`
   border-radius: 15px;
   margin-bottom: 10px;
   a {
-    display: block;
+    display: flex;
+    align-items: center;
     transition: color 0.2s ease-in;
   }
   &:hover {
@@ -57,6 +58,12 @@ const Title = styled.div`
 const Loader = styled.span`
   text-align: center;
   display: block;
+`;
+
+const Img = styled.img`
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
 `;
 
 const Coins = () => {
@@ -83,7 +90,21 @@ const Coins = () => {
         <CoinList>
           {coins.map((coin) => (
             <Coin key={coin.id}>
-              <Link to={`/ ${coin.id}`}> {coin.name} &rarr;</Link>
+              <Link
+                to={{
+                  // coin 클릭시 Loading.. message를 거치지 않도록 함
+                  pathname: `/ ${coin.id}`,
+                  state: { name: coin.name },
+                }}
+              >
+                <Img
+                  src={`https://raw.githubusercontent.com/ErikThiart/cryptocurrency-icons/master/16/${coin.name
+                    .toLowerCase()
+                    .split(" ")
+                    .join("-")}.png`}
+                />
+                {coin.name} &rarr;
+              </Link>
             </Coin>
           ))}
         </CoinList>
